@@ -1,5 +1,5 @@
-.env
+./.env
 .idea
-./__pycache__
+**/__pycache__
 **/credentials.json
 **/token.json
