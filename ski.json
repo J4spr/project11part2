@@ -1,0 +1,64 @@
+{
+  "locations": [
+    {
+      "name": "Les Trois Vallées",
+      "city": "Courchevel",
+      "lat": 45.343,
+      "lon": 6.578
+    },
+    {
+      "name": "Sölden",
+      "city": "Sölden",
+      "lat": 46.972,
+      "lon": 11.007
+    },
+    {
+      "name": "Chamonix-Mont Blanc",
+      "city": "Chamonix",
+      "lat": 45.923,
+      "lon": 6.869
+    },
+    {
+      "name": "Val di Fassa",
+      "city": "Canazei",
+      "lat": 46.450,
+      "lon": 11.745
+    },
+    {
+      "name": "Salzburger Sportwelt",
+      "city": "Salzburg",
+      "lat": 47.350,
+      "lon": 13.350
+    },
+    {
+      "name": "Alpenarena Flims-Laax-Falera",
+      "city": "Laax",
+      "lat": 46.833,
+      "lon": 9.250
+    },
+    {
+      "name": "Kitzsteinhorn Kaprun",
+      "city": "Kaprun",
+      "lat": 47.239,
+      "lon": 12.686
+    },
+    {
+      "name": "Ski Arlberg",
+      "city": "St. Anton",
+      "lat": 47.237,
+      "lon": 9.874
+    },
+    {
+      "name": "Espace Killy",
+      "city": "Val d'Isère",
+      "lat": 45.455,
+      "lon": 6.947
+    },
+    {
+      "name": "Spindleruv Mlyn",
+      "city": "Špindlerův Mlýn",
+      "lat": 50.723,
+      "lon": 15.607
+    }
+  ]
+}
