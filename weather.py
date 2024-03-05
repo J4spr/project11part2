@@ -1,13 +1,12 @@
 import requests
+import json
 
 
 def getweatherforecast(api_key, lat, lon):
-    # Function to fetch weather forecast from OpenWeatherMap API
-    url = f"api.openweathermap.org/data/2.5/forecast?q=lat={lat}&lon={lon}&appid={api_key}&units=metric"
-    response = requests.get(url)
-    data = response.json()
+    data = requests.get(
+        f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}&units={"metric"}").json()
     print(data)
-    # return data["list"][:5]  # only first 5 days
+    return data["list"][:5]  # only first 5 days
 
 
 def formatweatherforecast(weather_forecast):

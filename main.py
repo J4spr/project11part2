@@ -2,23 +2,16 @@ import json
 import os
 import sys
 
-from dotenv import load_dotenv
-
+import json
 from mail import *
 from weather import getweatherforecast
 
 # load the .env file
-load_dotenv()
-
-# if it doesn't work delete this line but for me, it didn't work, so I had to add this line
-print(os.getcwd())
-os.chdir("./projects/skiSeason")
-print(os.getcwd())
 
 
 def main():
-    # get api key from .env file and put it into a variable
-    key = os.getenv("WEATHER_TOKEN")
+    with open('apikey.json', 'r') as file:
+        key = json.load(file)
     # get the location from the json file
     locations = getonelocation()
     # TODO: remove this line for final version
