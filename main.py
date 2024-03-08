@@ -3,24 +3,40 @@ import os
 import sys
 
 import json
+
+import createMail
+import mail
+import weather
 from mail import *
-from weather import getweatherforecast
+import weather
 
 # load the .env file
 
 
 def main():
+    idealTemp = input("Enter temp in °C: ")
+    print("1) > 1mm")
+    print("2) > 2mm")
+    print("3) no preference")
+    idealRain = input("Enter ideal rain")
     with open('apikey.json', 'r') as file:
         key = json.load(file)
     # get the location from the json file
     locations = getonelocation()
-    # TODO: remove this line for final version
-    print(locations)
-    print("----------------------------------------")
+    list = []
+    # todo: remove this
+    # response = weather.getweatherforecast(key, locations[0][2], locations[0][3])
+    # response = weather.combineResults(weather.formatweatherforecast(response), {"city": locations[0][0], "country": locations[0][1]}, int(idealTemp), int(idealRain))
+    # list.append(response)
     for cords in locations:
-        print(cords)
-        response = getweatherforecast(key, cords[1], cords[2])
-        print(response)
+        response = weather.getweatherforecast(key, cords[2], cords[3])
+        response = weather.combineResults(weather.formatweatherforecast(response), {"city": cords[0], "country": cords[1]}, int(idealTemp), int(idealRain))
+        list.append(response)
+    print(list)
+    list = sorted(list, key=lambda x: x.get("score"), reverse=True)
+    print(list)
+    email = createMail.createMail(list)
+    mail.send("minejeis.developer@gmail.com", email)
 
 
 def parsejson():
@@ -39,13 +55,12 @@ def getonelocation():
     locationlist = []
     # loop over each location in the json file and get the lat and lon
     for location in data["locations"]:
-        name = location['name']
+        city = location['city']
         lat = location['lat']
         lon = location['lon']
-        locationtup = (name, lat, lon)
+        country = location['country']
+        locationtup = (city, country, lat, lon)
         locationlist.append(locationtup)
-        # TODO: remove this line for final version
-        print(f"name: {name}, lat: {lat}, lon: {lon}")
     return locationlist
 
 

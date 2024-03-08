@@ -7,12 +7,14 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.compose"]
 
 
-def send():
+def send(adress, mail):
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
     """
@@ -40,28 +42,17 @@ def send():
         service = build("gmail", "v1", credentials=creds)
 
         # Mime multipart message
-        # msg = MIMEMultipart()
-        # msg['to'] = "jasper07.verbruggen@gmail.coms"
-        # msg['subject'] = "Weerbericht"
+        msg = MIMEMultipart()
+        msg['to'] = adress
+        msg['subject'] = "Weerbericht"
 
         # Attach the HTML message
-        # msg.attach(MIMEText(q, 'html'))
+        msg.attach(MIMEText(str(mail), 'html'))
 
         # Encode the message as base64
-        # raw_message = base64.urlsafe_b64encode(msg.as_bytes()).decode()
+        raw_message = base64.urlsafe_b64encode(msg.as_bytes()).decode()
 
-        message = EmailMessage()
-
-        message.set_content("This is automated draft mail from my other project")
-
-        message["To"] = "jasper07.verbruggen@gmail.com"
-        message["From"] = "jasper07.verbruggen@gmail.com"
-        message["Subject"] = "Automated draft"
-
-        # encoded message
-        encoded_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
-
-        create_message = {"message": {"raw": encoded_message}}
+        create_message = {"message": {"raw": raw_message}}
         # pylint: disable=E1101
         draft = (
             service.users()
