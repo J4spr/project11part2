@@ -48,7 +48,7 @@ def combineResults(results, location, idealTemp, idealRain):
         score = 2
     elif idealTemp - 10 <= temp <= idealTemp + 10:
         score = 1
-    if idealRain != 3 and rain < idealRain * 10:
+    if idealRain != 3 and rain < idealRain:
         score += 4
     response = {
         # maakt een lijst met de begin en einddatum

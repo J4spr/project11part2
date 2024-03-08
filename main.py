@@ -14,11 +14,19 @@ import weather
 
 
 def main():
-    idealTemp = input("Enter temp in °C: ")
+    while True:
+        idealTemp = input("Enter temp in °C: ")
+        if idealTemp.isnumeric():
+            break
+        print("enter a correct number")
     print("1) > 1mm")
     print("2) > 2mm")
     print("3) no preference")
-    idealRain = input("Enter ideal rain")
+    while True:
+        idealRain = input("Enter ideal rain: ")
+        if idealRain.isnumeric() and 1 <= int(idealRain) <= 3:
+            break
+        print("enter a correct number")
     with open('apikey.json', 'r') as file:
         key = json.load(file)
     # get the location from the json file
@@ -32,11 +40,10 @@ def main():
         response = weather.getweatherforecast(key, cords[2], cords[3])
         response = weather.combineResults(weather.formatweatherforecast(response), {"city": cords[0], "country": cords[1]}, int(idealTemp), int(idealRain))
         list.append(response)
-    print(list)
     list = sorted(list, key=lambda x: x.get("score"), reverse=True)
-    print(list)
     email = createMail.createMail(list)
     mail.send("minejeis.developer@gmail.com", email)
+    print("mail sent")
 
 
 def parsejson():
